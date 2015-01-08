@@ -16,7 +16,8 @@
 	<beans profile="develop">
 		<bean id="ds" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close"> 
 		    <!-- 基本属性 url、user、password -->
-		    <property name="url" value="jdbc:mysql://192.168.1.17:8066/dbAfdUser" />
+		    <property name="driverClassName" value="com.alibaba.cobar.jdbc.Driver" /> 
+		    <property name="url" value="jdbc:cobar://192.168.1.17:8066/dbAfdUser" />
 		    <property name="username" value="afdUser" />
 		    <property name="password" value="123456" />
 		    <property name="connectionProperties" value="config.decrypt=false" />
