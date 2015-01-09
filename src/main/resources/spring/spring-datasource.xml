@@ -20,7 +20,7 @@
 		    <property name="url" value="jdbc:cobar://192.168.1.17:8066/dbAfdUser" />
 		    <property name="username" value="afdUser" />
 		    <property name="password" value="123456" />
-		    <property name="connectionProperties" value="config.decrypt=false" />
+		    <property name="connectionProperties" value="config.decrypt=true" />
 		      
 		    <!-- 配置初始化大小、最小、最大 -->
 		    <property name="initialSize" value="5" />
@@ -43,7 +43,9 @@
 		 
 		    <!-- PSCache，并且指定每个连接上PSCache的大小  （oracle推荐打开、mysql推荐关闭）-->
 		    <property name="poolPreparedStatements" value="false" />
-		    <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />		 		   
+		    <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+		    <!-- 配置监控统计拦截的filters -->
+		    <property name="filters" value="mergeStat,config" /> 		 		   
 		</bean>		
 	</beans>	
 </beans>
