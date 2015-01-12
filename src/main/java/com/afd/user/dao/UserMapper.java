@@ -1,5 +1,7 @@
 package com.afd.user.dao;
 
+import org.apache.ibatis.annotations.Select;
+
 import com.afd.model.user.User;
 
 public interface UserMapper {
@@ -14,4 +16,7 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    @Select("SELECT count(*) FROM t_user WHERE user_name = #{userName}")
+	int userCount(String userName);
 }
