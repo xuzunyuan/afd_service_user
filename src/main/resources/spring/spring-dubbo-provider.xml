@@ -19,7 +19,7 @@
 		accepts="1000" payload="8388608" /> -->
  
     <!-- 声明需要暴露的服务接口  loadbalance: random(随机);roundrobin(轮询);leastactive(最小活跃调用)-->
-    <dubbo:service owner="liubo" timeout="2000" interface="com.afd.service.order.IOrderService" loadbalance="random" ref="orderService" />
+    <dubbo:service owner="liubo" timeout="2000" interface="com.afd.service.user.IGeoService" loadbalance="random" ref="geoService" />
 	
 
 </beans>

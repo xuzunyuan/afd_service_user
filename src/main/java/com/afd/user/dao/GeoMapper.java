@@ -1,5 +1,9 @@
 package com.afd.user.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.afd.model.user.Geo;
 
 public interface GeoMapper {
@@ -14,4 +18,8 @@ public interface GeoMapper {
     int updateByPrimaryKeySelective(Geo record);
 
     int updateByPrimaryKey(Geo record);
+
+	List<Geo> getGeoByLevel(@Param("geoLevel") String geoLevel);
+
+	List<Geo> getGeoByFid(@Param("fid") long fid);
 }
