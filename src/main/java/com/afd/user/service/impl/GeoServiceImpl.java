@@ -80,4 +80,18 @@ public class GeoServiceImpl implements IGeoService {
 		return geo;
 	}
 
+	@Override
+	public List<Geo> getGeosByIds(List<Integer> ids) {
+		List<Geo> geos = new ArrayList<Geo>();
+		if(ids!=null&&ids.size()>0){
+			for(Integer id : ids){
+				Geo geo = this.getGeoById(id);
+				if(geo!=null){
+					geos.add(geo);
+				}
+			}
+		}
+		return geos;
+	}
+
 }
