@@ -276,7 +276,7 @@
 		land_mark = #{landMark,jdbcType=VARCHAR}
 		where addr_id = #{addrId,jdbcType=INTEGER}
 	</update>
-	<select id="getAddressByUserId" resultMap="resultMap">
+	<select id="getAddressByUserId" resultMap="BaseResultMap">
 		select 
 			<include refid="Base_Column_List" />
 		from t_user_address t
