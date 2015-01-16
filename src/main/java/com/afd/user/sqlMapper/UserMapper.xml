@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.afd.user.dao.UserMapper" >
   <resultMap id="BaseResultMap" type="com.afd.model.user.User" >
-    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <id column="user_id" property="userId" jdbcType="DECIMAL" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="pwd" property="pwd" jdbcType="VARCHAR" />
     <result column="pwd_key" property="pwdKey" jdbcType="CHAR" />
@@ -33,15 +33,15 @@
     market_from, reg_ip, last_login_date, last_login_ip, freeze_by_name, Freeze_by_id, 
     freeze_by_date
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from t_user
-    where user_id = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=DECIMAL}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_user
-    where user_id = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=DECIMAL}
   </delete>
   <insert id="insert" parameterType="com.afd.model.user.User" >
     insert into t_user (user_id, user_name, pwd, 
@@ -53,7 +53,7 @@
       reg_ip, last_login_date, last_login_ip, 
       freeze_by_name, Freeze_by_id, freeze_by_date
       )
-    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
+    values (#{userId,jdbcType=DECIMAL}, #{userName,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
       #{pwdKey,jdbcType=CHAR}, #{nickname,jdbcType=VARCHAR}, #{type,jdbcType=DECIMAL}, 
       #{status,jdbcType=DECIMAL}, #{levelId,jdbcType=DECIMAL}, #{levelName,jdbcType=VARCHAR}, 
       #{mobile,jdbcType=CHAR}, #{isMobileCheck,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, 
@@ -141,7 +141,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
+        #{userId,jdbcType=DECIMAL},
       </if>
       <if test="userName != null" >
         #{userName,jdbcType=VARCHAR},
@@ -287,7 +287,7 @@
         freeze_by_date = #{freezeByDate,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where user_id = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=DECIMAL}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.afd.model.user.User" >
     update t_user
@@ -314,6 +314,6 @@
       freeze_by_name = #{freezeByName,jdbcType=CHAR},
       Freeze_by_id = #{freezeById,jdbcType=DECIMAL},
       freeze_by_date = #{freezeByDate,jdbcType=TIMESTAMP}
-    where user_id = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=DECIMAL}
   </update>
 </mapper>
