@@ -47,23 +47,9 @@ public class UserServiceImpl implements IUserService {
 	public static void main(String[] args) {
 		System.out.println(RandomStringUtils.randomAlphanumeric(20));
 	}
+	
 	@Override
-	public boolean logIn(String userName, String pwd) {
-		if(StringUtils.isBlank(userName) || StringUtils.isBlank(pwd)){
-			return false;
-		}
-		
-		User user = this.userMapper.selectUserByUserName(userName);
-		if(user == null){
-			return false;
-		}
-		
-		String userKey = user.getPwdKey();
-		String validPwd = DigestUtils.md5Hex(DigestUtils.md5Hex(userKey+SystemConstants.WEB_KEY)+pwd);
-		if(validPwd.equals(user.getPwd())){
-			return true;
-		}
-		
-		return false;
+	public User getUserByUserName(String userName) {
+		return this.userMapper.selectUserByUserName(userName);
 	}
 }
