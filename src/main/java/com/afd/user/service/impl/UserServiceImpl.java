@@ -13,9 +13,12 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public boolean uniqueUserName(String userName) {
 		int count = this.userMapper.userCount(userName);
-		return false;
+		if(count >1){
+			return false;
+		}
+		return true;
 	}
-    
+	@Override
 	public User getUserById(Long userId){
 		return this.userMapper.selectByPrimaryKey(userId);
 	}
