@@ -52,4 +52,11 @@ public class UserServiceImpl implements IUserService {
 	public User getUserByUserName(String userName) {
 		return this.userMapper.selectUserByUserName(userName);
 	}
+	@Override
+	public int updateUser(User user) {
+		if(user!=null&&user.getUserId()!=null){
+			return this.userMapper.updateByPrimaryKeySelective(user);
+		}
+		return 0;
+	}
 }

@@ -1,6 +1,5 @@
 package com.afd.user.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.afd.common.util.DateUtils;
