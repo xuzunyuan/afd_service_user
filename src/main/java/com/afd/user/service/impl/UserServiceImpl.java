@@ -2,7 +2,6 @@ package com.afd.user.service.impl;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.RandomStringUtils;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +19,7 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public boolean uniqueUserName(String userName) {
 		int count = this.userMapper.userCount(userName);
-		if(count >1){
+		if(count >0){
 			return false;
 		}
 		return true;
@@ -58,5 +57,13 @@ public class UserServiceImpl implements IUserService {
 			return this.userMapper.updateByPrimaryKeySelective(user);
 		}
 		return 0;
+	}
+	@Override
+	public boolean uniqueMobile(String mobile) {
+		int count = this.userMapper.mobileCount(mobile);
+		if(count >0){
+			return false;
+		}
+		return true;
 	}
 }
