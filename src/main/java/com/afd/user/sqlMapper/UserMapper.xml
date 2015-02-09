@@ -338,4 +338,13 @@
 			and status = '1'
 		</where>
 	</select>
+	<select id="selectUserByMobile" resultMap="BaseResultMap">
+		select 
+			<include refid="Base_Column_List"/>
+		from t_user
+		<where>
+			mobile = #{mobile,jdbcType=VARCHAR}
+			and status = '1'
+		</where>
+	</select>
 </mapper>

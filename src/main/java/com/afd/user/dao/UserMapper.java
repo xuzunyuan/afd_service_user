@@ -25,4 +25,6 @@ public interface UserMapper {
 
     @Select("SELECT count(*) FROM t_user WHERE mobile = #{mobile}")
 	int mobileCount(String mobile);
+
+	User selectUserByMobile(@Param("mobile")String mobile);
 }

@@ -66,4 +66,19 @@ public class UserServiceImpl implements IUserService {
 		}
 		return true;
 	}
+	@Override
+	public User getUserByMobile(String mobile) {
+		return this.userMapper.selectUserByMobile(mobile);
+	}
+	@Override
+	public int chgPwd(String mobile, String pwd) {
+		User user = this.getUserByMobile(mobile);
+		if(user !=null){
+			String pwdKey = user.getPwdKey();
+			pwd = DigestUtils.md5Hex(DigestUtils.md5Hex(pwdKey+SystemConstants.WEB_KEY)+pwd);
+			user.setPwd(pwd);
+			return this.updateUser(user);
+		}
+		return 0;
+	}
 }
