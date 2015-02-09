@@ -21,5 +21,6 @@
     <!-- 声明需要暴露的服务接口  loadbalance: random(随机);roundrobin(轮询);leastactive(最小活跃调用)-->
     <dubbo:service owner="liubo" timeout="2000" interface="com.afd.service.user.IGeoService" loadbalance="random" ref="geoService" />
 	<dubbo:service owner="liubo" timeout="2000" interface="com.afd.service.user.IUserService" loadbalance="random" ref="userService" />
+	<dubbo:service owner="liubo" timeout="2000" interface="com.afd.service.user.IAddressService" loadbalance="random" ref="addressService" />
 
 </beans>

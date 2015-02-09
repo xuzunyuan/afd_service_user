@@ -2,14 +2,19 @@ package com.afd.user.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.afd.common.util.DateUtils;
 import com.afd.constants.user.UserConstants;
 import com.afd.model.user.UserAddress;
 import com.afd.service.user.IAddressService;
 import com.afd.user.dao.UserAddressMapper;
 
+@Service("addressService")
 public class AddressServiceImpl implements IAddressService {
 	
+	@Autowired
 	private UserAddressMapper userAddressMapper;
 
 	@Override
