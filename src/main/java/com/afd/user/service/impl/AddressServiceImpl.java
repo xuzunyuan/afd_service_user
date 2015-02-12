@@ -18,7 +18,7 @@ public class AddressServiceImpl implements IAddressService {
 	private UserAddressMapper userAddressMapper;
 
 	@Override
-	public UserAddress getAddressById(int addressId) {
+	public UserAddress getAddressById(long addressId) {
 		return this.userAddressMapper.selectByPrimaryKey(addressId);
 	}
 
@@ -37,7 +37,7 @@ public class AddressServiceImpl implements IAddressService {
 	}
 
 	@Override
-	public int delAddress(int addrId) {
+	public int delAddress(long addrId) {
 		UserAddress address = new UserAddress();
 		address.setAddrId(addrId);
 		address.setUpdateDate(DateUtils.currentDate());

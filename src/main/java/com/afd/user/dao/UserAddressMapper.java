@@ -7,13 +7,13 @@ import org.apache.ibatis.annotations.Param;
 import com.afd.model.user.UserAddress;
 
 public interface UserAddressMapper {
-    int deleteByPrimaryKey(Integer addrId);
+    int deleteByPrimaryKey(long addrId);
 
     int insert(UserAddress record);
 
     int insertSelective(UserAddress record);
 
-    UserAddress selectByPrimaryKey(Integer addrId);
+    UserAddress selectByPrimaryKey(long addrId);
 
     int updateByPrimaryKeySelective(UserAddress record);
 
