@@ -27,4 +27,6 @@ public interface UserMapper {
 	int mobileCount(String mobile);
 
 	User selectUserByMobile(@Param("mobile")String mobile);
+
+	User getUserInfoById(@Param("userId")long userId);
 }

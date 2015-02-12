@@ -32,13 +32,44 @@
 		<result column="freeze_by_date" property="freezeByDate"
 			jdbcType="TIMESTAMP" />
 	</resultMap>
+
+	<resultMap type="com.afd.model.user.User" extends="BaseResultMap"
+		id="BaseResultMap2">
+		<association property="userExt" javaType="com.afd.model.user.UserExt">
+			<id column="user_id" property="userId" jdbcType="DECIMAL" />
+			<result column="real_name" property="realName" jdbcType="VARCHAR" />
+			<result column="gender" property="gender" jdbcType="CHAR" />
+			<result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+			<result column="constellation" property="constellation"
+				jdbcType="VARCHAR" />
+			<result column="home_address" property="homeAddress" jdbcType="VARCHAR" />
+			<result column="zip_code" property="zipCode" jdbcType="CHAR" />
+			<result column="tel" property="tel" jdbcType="VARCHAR" />
+			<result column="header_pic" property="headerPic" jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
 	<sql id="Base_Column_List">
-		user_id, user_name, pwd, pwd_key, nickname, type, status, level_id,
+		user_id, user_name, pwd, pwd_key, nickname, type, status,
+		level_id,
 		level_name, mobile,
-		Is_mobile_check, email, Is_email_check, id_code, is_bind_id, reg_date, reg_from,
-		market_from, reg_ip, last_login_date, last_login_ip, freeze_by_name,
+		Is_mobile_check, email, Is_email_check,
+		id_code, is_bind_id, reg_date, reg_from,
+		market_from, reg_ip,
+		last_login_date, last_login_ip, freeze_by_name,
 		Freeze_by_id,
 		freeze_by_date
+	</sql>
+	<sql id="Base_Column_List2">
+		select
+		t.user_id,t.user_name,t.pwd,t.pwd_key,t.nickname,t.type,t.status,t.level_id,t.level_name,t.mobile,
+		t.Is_mobile_check,t.email,t.Is_email_check,t.id_code,t.is_bind_id,t.reg_date,t.reg_from,t.market_from,t.reg_ip,
+		t.last_login_date,t.last_login_ip,t.freeze_by_name,t.Freeze_by_id,t.freeze_by_date,
+		t1.user_id, t1.real_name, t1.gender, t1.birthday, t1.constellation,
+		t1.home_address, t1.zip_code, t1.tel,
+		t1.header_pic
+		from t_user t left outer join t_user_ext t1 on t.user_id = t1.user_id
+		where 
+			1=1
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Long">
@@ -52,27 +83,34 @@
 		where user_id = #{userId,jdbcType=DECIMAL}
 	</delete>
 	<insert id="insert" parameterType="com.afd.model.user.User">
-		insert into t_user (user_id, user_name, pwd,
+		insert into t_user (user_id,
+		user_name, pwd,
 		pwd_key, nickname, type,
 		status, level_id, level_name,
 		mobile, Is_mobile_check, email,
 		Is_email_check, id_code, is_bind_id,
 		reg_date, reg_from, market_from,
-		reg_ip, last_login_date, last_login_ip,
+		reg_ip, last_login_date,
+		last_login_ip,
 		freeze_by_name, Freeze_by_id, freeze_by_date
 		)
-		values (#{userId,jdbcType=DECIMAL}, #{userName,jdbcType=VARCHAR},
+		values
+		(#{userId,jdbcType=DECIMAL}, #{userName,jdbcType=VARCHAR},
 		#{pwd,jdbcType=VARCHAR},
-		#{pwdKey,jdbcType=CHAR}, #{nickname,jdbcType=VARCHAR}, #{type,jdbcType=DECIMAL},
+		#{pwdKey,jdbcType=CHAR},
+		#{nickname,jdbcType=VARCHAR}, #{type,jdbcType=DECIMAL},
 		#{status,jdbcType=DECIMAL}, #{levelId,jdbcType=DECIMAL},
 		#{levelName,jdbcType=VARCHAR},
-		#{mobile,jdbcType=CHAR}, #{isMobileCheck,jdbcType=CHAR}, #{email,jdbcType=VARCHAR},
+		#{mobile,jdbcType=CHAR},
+		#{isMobileCheck,jdbcType=CHAR}, #{email,jdbcType=VARCHAR},
 		#{isEmailCheck,jdbcType=CHAR}, #{idCode,jdbcType=CHAR},
 		#{isBindId,jdbcType=CHAR},
-		#{regDate,jdbcType=TIMESTAMP}, #{regFrom,jdbcType=VARCHAR}, #{marketFrom,jdbcType=VARCHAR},
+		#{regDate,jdbcType=TIMESTAMP},
+		#{regFrom,jdbcType=VARCHAR}, #{marketFrom,jdbcType=VARCHAR},
 		#{regIp,jdbcType=VARCHAR}, #{lastLoginDate,jdbcType=TIMESTAMP},
 		#{lastLoginIp,jdbcType=CHAR},
-		#{freezeByName,jdbcType=CHAR}, #{freezeById,jdbcType=DECIMAL}, #{freezeByDate,jdbcType=TIMESTAMP}
+		#{freezeByName,jdbcType=CHAR},
+		#{freezeById,jdbcType=DECIMAL}, #{freezeByDate,jdbcType=TIMESTAMP}
 		)
 	</insert>
 	<insert id="insertSelective" keyProperty="userId"
@@ -304,34 +342,48 @@
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.afd.model.user.User">
 		update t_user
-		set user_name = #{userName,jdbcType=VARCHAR},
-		pwd = #{pwd,jdbcType=VARCHAR},
+		set
+		user_name = #{userName,jdbcType=VARCHAR},
+		pwd =
+		#{pwd,jdbcType=VARCHAR},
 		pwd_key = #{pwdKey,jdbcType=CHAR},
-		nickname = #{nickname,jdbcType=VARCHAR},
+		nickname =
+		#{nickname,jdbcType=VARCHAR},
 		type = #{type,jdbcType=DECIMAL},
-		status = #{status,jdbcType=DECIMAL},
+		status =
+		#{status,jdbcType=DECIMAL},
 		level_id = #{levelId,jdbcType=DECIMAL},
 		level_name = #{levelName,jdbcType=VARCHAR},
-		mobile = #{mobile,jdbcType=CHAR},
-		Is_mobile_check = #{isMobileCheck,jdbcType=CHAR},
+		mobile =
+		#{mobile,jdbcType=CHAR},
+		Is_mobile_check =
+		#{isMobileCheck,jdbcType=CHAR},
 		email = #{email,jdbcType=VARCHAR},
 		Is_email_check = #{isEmailCheck,jdbcType=CHAR},
-		id_code = #{idCode,jdbcType=CHAR},
+		id_code =
+		#{idCode,jdbcType=CHAR},
 		is_bind_id = #{isBindId,jdbcType=CHAR},
 		reg_date = #{regDate,jdbcType=TIMESTAMP},
-		reg_from = #{regFrom,jdbcType=VARCHAR},
-		market_from = #{marketFrom,jdbcType=VARCHAR},
+		reg_from =
+		#{regFrom,jdbcType=VARCHAR},
+		market_from =
+		#{marketFrom,jdbcType=VARCHAR},
 		reg_ip = #{regIp,jdbcType=VARCHAR},
 		last_login_date = #{lastLoginDate,jdbcType=TIMESTAMP},
-		last_login_ip = #{lastLoginIp,jdbcType=CHAR},
-		freeze_by_name = #{freezeByName,jdbcType=CHAR},
-		Freeze_by_id = #{freezeById,jdbcType=DECIMAL},
-		freeze_by_date = #{freezeByDate,jdbcType=TIMESTAMP}
-		where user_id = #{userId,jdbcType=DECIMAL}
+		last_login_ip =
+		#{lastLoginIp,jdbcType=CHAR},
+		freeze_by_name =
+		#{freezeByName,jdbcType=CHAR},
+		Freeze_by_id =
+		#{freezeById,jdbcType=DECIMAL},
+		freeze_by_date =
+		#{freezeByDate,jdbcType=TIMESTAMP}
+		where user_id =
+		#{userId,jdbcType=DECIMAL}
 	</update>
 	<select id="selectUserByUserName" resultMap="BaseResultMap">
-		select 
-			<include refid="Base_Column_List"/>
+		select
+		<include refid="Base_Column_List" />
 		from t_user
 		<where>
 			user_name = #{userName,jdbcType=VARCHAR}
@@ -339,12 +391,17 @@
 		</where>
 	</select>
 	<select id="selectUserByMobile" resultMap="BaseResultMap">
-		select 
-			<include refid="Base_Column_List"/>
+		select
+		<include refid="Base_Column_List" />
 		from t_user
 		<where>
 			mobile = #{mobile,jdbcType=VARCHAR}
 			and status = '1'
 		</where>
+	</select>
+	<select id="getUserInfoById" resultMap="BaseResultMap2">
+		<include refid="Base_Column_List2"/>
+		and t.user_id = #{userId,jdbcType=DECIMAL}
+		and t.status = '1'
 	</select>
 </mapper>

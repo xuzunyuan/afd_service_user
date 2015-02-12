@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import com.afd.common.util.DateUtils;
 import com.afd.constants.SystemConstants;
 import com.afd.model.user.User;
+import com.afd.model.user.UserExt;
 import com.afd.service.user.IUserService;
+import com.afd.user.dao.UserExtMapper;
 import com.afd.user.dao.UserMapper;
 
 @Service("userService")
@@ -16,6 +18,9 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	private UserMapper userMapper;
+	@Autowired
+	private UserExtMapper userExtMapper;
+	
 	@Override
 	public boolean uniqueUserName(String userName) {
 		int count = this.userMapper.userCount(userName);
@@ -78,6 +83,22 @@ public class UserServiceImpl implements IUserService {
 			pwd = DigestUtils.md5Hex(DigestUtils.md5Hex(pwdKey+SystemConstants.WEB_KEY)+pwd);
 			user.setPwd(pwd);
 			return this.updateUser(user);
+		}
+		return 0;
+	}
+	@Override
+	public User getUserInfoById(long userId) {
+		return this.userMapper.getUserInfoById(userId);
+	}
+	@Override
+	public int updateUserExt(UserExt userExt) {
+		if(userExt!=null&&userExt.getUserId()!=null){
+			UserExt ueTemp = this.userExtMapper.selectByPrimaryKey(userExt.getUserId());
+			if(ueTemp!=null){
+				this.userExtMapper.updateByPrimaryKeySelective(userExt);
+			}else{
+				this.userExtMapper.insertSelective(userExt);
+			}
 		}
 		return 0;
 	}
