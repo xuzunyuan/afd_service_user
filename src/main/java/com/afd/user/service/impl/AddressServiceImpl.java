@@ -31,6 +31,9 @@ public class AddressServiceImpl implements IAddressService {
 	public int addAddress(UserAddress address) {
 		if(address !=null){
 			address.setCreateDate(DateUtils.currentDate());
+			if(UserConstants.ADDRESS_IS_DEFAULT.equals(address.getIsDefault())){
+				this.userAddressMapper.resetDefault(address.getUserId());
+			}
 			return this.userAddressMapper.insertSelective(address);
 		}
 		return 0;
@@ -49,9 +52,29 @@ public class AddressServiceImpl implements IAddressService {
 	public int updateAddress(UserAddress address) {
 		if(address!=null&&address.getAddrId()!=null){
 			address.setUpdateDate(DateUtils.currentDate());
+			if(UserConstants.ADDRESS_IS_DEFAULT.equals(address.getIsDefault())){
+				this.userAddressMapper.resetDefault(address.getUserId());
+			}
+			
 			return this.userAddressMapper.updateByPrimaryKeySelective(address);
 		}
 		return 0;
+	}
+
+	@Override
+	public void setDefault(String addrId, String userId) {
+		this.userAddressMapper.resetDefault(Long.parseLong(userId));
+		this.userAddressMapper.setDefault(addrId,userId);
+	}
+
+	@Override
+	public void delAddr(Long addrId, long userId) {
+		this.userAddressMapper.delAddr(addrId,userId);
+	}
+
+	@Override
+	public UserAddress getAddressByIdUid(Long addrId, long userId) {
+		return this.userAddressMapper.getAddrByIdUid(addrId,userId);
 	}
 
 }

@@ -20,4 +20,12 @@ public interface UserAddressMapper {
     int updateByPrimaryKey(UserAddress record);
 
 	List<UserAddress> getAddressByUserId(@Param("userId")long userId);
+
+	int resetDefault(@Param("userId")Long userId);
+
+	int setDefault(@Param("addrId")String addrId, @Param("userId")String userId);
+
+	int delAddr(@Param("addrId")Long addrId, @Param("userId")long userId);
+
+	UserAddress getAddrByIdUid(@Param("addrId")Long addrId, @Param("userId")long userId);
 }

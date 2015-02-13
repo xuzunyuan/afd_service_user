@@ -285,4 +285,39 @@
 			t.status = '1'
 		</where>
 	</select>
+	<update id="resetDefault">
+		update t_user_address t
+		set t.is_default = '0',
+			t.update_date = NOW()
+		<where>
+			t.user_id = #{userId,jdbcType=INTEGER}
+		</where>
+	</update>
+	<update id="setDefault">
+		update t_user_address t
+		set t.is_default = '1',
+			t.update_date = NOW()
+		<where>
+			t.addr_id = #{addrId,jdbcType=INTEGER}
+			and t.user_id = #{userId,jdbcType=INTEGER}
+		</where>
+	</update>
+	<update id="delAddr">
+		update t_user_address t
+		set t.status = '0',
+			t.update_date = NOW()
+		<where>
+			t.addr_id = #{addrId,jdbcType=INTEGER}
+			and t.user_id = #{userId,jdbcType=INTEGER}
+		</where>
+	</update>
+	<select id="getAddrByIdUid" resultMap="BaseResultMap">
+		select
+			<include refid="Base_Column_List"/>
+		from t_user_address
+		<where>
+			addr_id = #{addrId,jdbcType=INTEGER}
+			and user_id = #{userId,jdbcType=INTEGER}
+		</where>
+	</select>
 </mapper>
