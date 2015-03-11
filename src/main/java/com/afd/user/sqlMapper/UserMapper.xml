@@ -388,10 +388,10 @@
 		from t_user
 		<where>
 			<if test="cond.regDateStart != null and cond.regDateStart != ''" >
-	    		and date_format(reg_date, '%Y-%m-%d') >= #{cond.regDateStart,jdbcType=VARCHAR}
+	    		and date_format(reg_date, '%Y-%m-%d') &gt;= #{cond.regDateStart,jdbcType=VARCHAR}
 	    	</if>
 	    	<if test="cond.regDateEnd != null and cond.regDateEnd != ''" >
-	    		and date_format(reg_date, '%Y-%m-%d') <= #{cond.regDateEnd,jdbcType=VARCHAR}
+	    		and date_format(reg_date, '%Y-%m-%d') &lt;= #{cond.regDateEnd,jdbcType=VARCHAR}
 	    	</if>
 	    	<if test="cond.userName != null and cond.userName != ''" >
 	     		<bind name="userName" value="'%' + cond.userName + '%'" />
@@ -402,7 +402,7 @@
 			 	and nickname like #{nickname,jdbcType=VARCHAR}
 			</if>
 			<if test="cond.mobile != null and cond.mobile != ''" >
-	     		and mobile = #{cond.coName,jdbcType=VARCHAR}
+	     		and mobile = #{cond.mobile,jdbcType=VARCHAR}
 			</if>
 		</where>
 	</select>

@@ -85,8 +85,13 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public int chgPwd(String mobile, String pwd) {
-		User user = this.getUserByMobile(mobile);
+	public int chgPwdById(long userId, String pwd) {
+		User user = this.getUserById(userId);
+
+		return chgPwd(user, pwd);
+	}
+
+	private int chgPwd(User user, String pwd) {
 		if (user != null) {
 			String pwdKey = user.getPwdKey();
 			pwd = DigestUtils.md5Hex(DigestUtils.md5Hex(pwdKey
@@ -96,6 +101,12 @@ public class UserServiceImpl implements IUserService {
 			return this.updateUser(user);
 		}
 		return 0;
+	}
+
+	@Override
+	public int chgPwd(String mobile, String pwd) {
+		User user = this.getUserByMobile(mobile);
+		return chgPwd(user, pwd);
 	}
 
 	@Override
@@ -131,4 +142,5 @@ public class UserServiceImpl implements IUserService {
 
 		return pg;
 	}
+
 }
